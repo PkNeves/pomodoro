@@ -11,6 +11,7 @@
       @pause="pause()"
       @reset="reset($event)" 
     />
+    <Footer />
   </div>
 </template>
 
@@ -18,10 +19,11 @@
 import Clock from '@/components/Clock'
 import ClockControl from '@/components/ClockControl'
 import Timer from '@/components/Timer'
+import Footer from '@/components/Footer'
 export default {
   name: 'App',
   components: {
-    Clock, ClockControl, Timer
+    Clock, ClockControl, Timer, Footer
   },
   mounted () {
     this.ring = new Audio("http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3")
@@ -115,6 +117,9 @@ export default {
   background-color:#E5E5F0;
 }
 #app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
