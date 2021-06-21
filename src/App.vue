@@ -23,8 +23,12 @@ export default {
   components: {
     Clock, ClockControl, Timer
   },
+  mounted () {
+    this.ring = new Audio("http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3")
+  },
   data() {
     return {
+      ring: '',
       clock: {
         minute: 25,
         second: 0
@@ -44,6 +48,7 @@ export default {
         this.interval = setInterval(() => {
           if (this.clock.minute === 0 && this.clock.second === 0) {
             clearInterval(this.interval)
+            this.ring.play()
             return
           }
           if (this.clock.second == 0) {
@@ -89,6 +94,7 @@ export default {
   border: none;
   margin-bottom: 30px;
   margin-left: 20px;
+  cursor: pointer;
 }
 
 * button span {
@@ -104,7 +110,6 @@ export default {
     text-align: center;
 
     color: #7878AB;
-    cursor: pointer;
   }
 * button:hover {
   background-color:#E5E5F0;
@@ -120,4 +125,5 @@ html {
   background-color: #F5F5FA;
 
 }
+
 </style>

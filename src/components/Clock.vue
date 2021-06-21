@@ -40,4 +40,9 @@ export default {
     font-weight: 700;
     color: #7878AB;
   }
+  @media screen and (max-width: 800px) {
+    p {
+      font-size: 3em;
+    }
+  }
 </style>

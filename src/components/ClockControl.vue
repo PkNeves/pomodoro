@@ -1,5 +1,5 @@
 <template>
-  <div class="clockControl">
+  <div class="clockControl flex-container">
     <button @click="$emit('start')"><span class='start'>Start</span></button>
     <button @click="$emit('pause')"><span class='pause'>Pause</span></button>
     <button @click="$emit('reset')"><span class='reset'>Reset</span></button>
@@ -24,5 +24,16 @@
   }
   .reset {
     color: #ab7878;
+  }
+  @media screen and (max-width: 800px) {
+    button {
+      font-size: 0.2em;
+      margin: 15px 0;
+      width: 200px;
+    }
+    span {
+      display: flex;
+      justify-content: center;
+    }
   }
 </style>
