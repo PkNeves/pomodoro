@@ -14,10 +14,11 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: stretch;
+    align-content: center;
     margin: 0 10%;
     flex-wrap: wrap;
     margin-top: 30px;
-
   }
   .start {
     color: #78ab78;
@@ -27,13 +28,15 @@
   }
   @media screen and (max-width: 800px) {
     button {
-      font-size: 0.2em;
-      margin: 15px 0;
-      width: 200px;
+      font-size: 2em;
+      margin: 10px 6px;
     }
     span {
       display: flex;
       justify-content: center;
+    }
+    .clockControl {
+      margin: 0 10%;
     }
   }
 </style>

@@ -36,13 +36,17 @@ export default {
 <style scoped>
   p {
     font-size: 5em;
-    margin: 0.5em 0;
+    margin: 0;
     font-weight: 700;
     color: #7878AB;
+  }
+  .clock {
+    margin: 0 10%;
   }
   @media screen and (max-width: 800px) {
     p {
       font-size: 3em;
+      margin: 0;
     }
   }
 </style>

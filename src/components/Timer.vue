@@ -7,41 +7,52 @@
 </template>
 
 <style scoped>
-  * {
-    font-family: 'Baloo Tammudu 2';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 40px;
-  }
   .timer {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin: 0 10%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
   }
-  button span {
-    font-family: 'Baloo Tammudu 2';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 40px;
-    /* identical to box height, or 111% */
-
-    display: flex;
-    align-items: center;
-    text-align: center;
-
-    color: #7878AB;
-  }
-   @media screen and (max-width: 800px) {
+  @media screen and (max-width: 800px) {
     button {
-      padding: 0.1rem 0.2rem;
-      margin: 0 2px;
+      padding: 0.4rem 1rem;
+    }
+    button span{
+      font-size: 0.55em;
+    }
+    .timer {
+      justify-content: space-between;
+    }
+  }
+   @media screen and (max-width: 600px) {
+    button {
+      padding: 0.1rem 0.4rem;
+      margin: 0;
     }
     button span{
       font-size: 0.4em;
     }
   }
+  @media screen and (max-width: 400px) {
+    button {
+      padding: 0.4rem 0.45rem;
+      margin: 0;
+    }
+    button span{
+      font-size: 0.3em;
+      line-height: 0.3rem;
+    }
+  }
+  @media screen and (max-width: 370px) {
+    button {
+      padding: 0.3rem 0.45rem;
+      margin: 0;
+    }
+    button span{
+      font-size: 0.24em;
+      line-height: 0.24rem;
+    }
+  }
+  
 </style>

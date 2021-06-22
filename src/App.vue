@@ -80,14 +80,13 @@ export default {
 
 <style>
 * {
-    font-family: 'Baloo Tammudu 2';
+    font-family: Goudy Bookletter 1911, sans-serif;
     font-style: normal;
     font-weight: bold;
     font-size: 36px;
-    line-height: 40px;
   }
 * button {
-  padding: 0.5rem 2rem;
+  padding: 0.4rem 1.4rem;
   background: #F5F5FA;
   /* Shadow 3 */
 
@@ -100,11 +99,8 @@ export default {
 }
 
 * button span {
-    font-family: 'Baloo Tammudu 2';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 36px;
-    line-height: 40px;
+    font-size: 26px;
+    line-height: 42px;
     /* identical to box height, or 111% */
 
     display: flex;
