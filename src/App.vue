@@ -46,22 +46,22 @@ export default {
   },
   methods: {
     start() {
-      if (this.interval !== undefined && this.clock.minute <= 0) {
-        return
-      }
-      this.interval = setInterval(() => {
-        if (this.clock.minute === 0 && this.clock.second === 0) {
-          this.interval = clearInterval(this.interval)
-          this.ring.play()
-          return
-        }
-        if (this.clock.second == 0) {
-          this.clock.minute -= 1
-          this.clock.second = 59
-        } else {
-          this.clock.second -= 1
-        }
-      }, 1000)
+      if (this.interval !== undefined || this.clock.minute <= 0) return
+      // if (this.clock.minute > 0) {
+        this.interval = setInterval(() => {
+          if (this.clock.minute === 0 && this.clock.second === 0) {
+            this.interval = clearInterval(this.interval)
+            this.ring.play()
+            return
+          }
+          if (this.clock.second == 0) {
+            this.clock.minute -= 1
+            this.clock.second = 10
+          } else {
+            this.clock.second -= 1
+          }
+        }, 1000)
+      // }
     },
     pause() {
       this.interval = clearInterval(this.interval)
