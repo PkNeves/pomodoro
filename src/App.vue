@@ -35,7 +35,7 @@ export default {
         minute: 25,
         second: 0
       },
-      interval: null,
+      interval: undefined,
       predefined: {
         minute: 25,
         second: 0
@@ -46,28 +46,31 @@ export default {
   },
   methods: {
     start() {
-      if (this.clock.minute > 0) {
-        this.interval = setInterval(() => {
-          if (this.clock.minute === 0 && this.clock.second === 0) {
-            clearInterval(this.interval)
-            this.ring.play()
-            return
-          }
-          if (this.clock.second == 0) {
-            this.clock.minute -= 1
-            this.clock.second = 59
-          } else {
-            this.clock.second -= 1
-          }
-        }, 1000)
+      if (this.interval !== undefined && this.clock.minute <= 0) {
+        return
       }
+      this.interval = setInterval(() => {
+        if (this.clock.minute === 0 && this.clock.second === 0) {
+          this.interval = clearInterval(this.interval)
+          this.ring.play()
+          return
+        }
+        if (this.clock.second == 0) {
+          this.clock.minute -= 1
+          this.clock.second = 59
+        } else {
+          this.clock.second -= 1
+        }
+      }, 1000)
     },
     pause() {
-      this.interval ? clearInterval(this.interval) : this.interval = null
+      this.interval = clearInterval(this.interval)
     },
     reset() {
       this.clock.minute = this.predefined.minute
       this.clock.second = this.predefined.second
+      this.interval = clearInterval(this.interval)
+
     },
     setPredefined(minute, second) {
       this.predefined.minute = minute
