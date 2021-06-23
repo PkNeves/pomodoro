@@ -56,7 +56,7 @@ export default {
           }
           if (this.clock.second == 0) {
             this.clock.minute -= 1
-            this.clock.second = 10
+            this.clock.second = 59
           } else {
             this.clock.second -= 1
           }
