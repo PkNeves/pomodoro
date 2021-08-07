@@ -77,6 +77,21 @@ export default {
       this.predefined.second = second
       this.reset()
     }
+  },
+  watch: {
+     clock: {
+      deep: true,
+      handler() {
+        let minute = this.clock.minute < 10 ? '0'+this.clock.minute : this.clock.minute
+        let second = this.clock.second < 10 ? '0'+this.clock.second : this.clock.second
+        document.title = `${minute}:${second} - pomodoro`
+      },
+      immediate() {
+        let minute = this.clock.minute < 10 ? '0'+this.clock.minute : this.clock.minute
+        let second = this.clock.second < 10 ? '0'+this.clock.second : this.clock.second
+        document.title = `${minute}:${second} - pomodoro`
+      }
+    }
   }
 }
 </script>
