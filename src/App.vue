@@ -51,6 +51,8 @@ export default {
   methods: {
     start() {
       // let tempDate = new Date()
+      if (this.interval2 !== undefined || this.clock.minute <= 0) return
+
       this.endDate = new Date()
       this.endDate.setMinutes(this.endDate.getMinutes() + this.restTime.minute)
       this.endDate.setSeconds(this.endDate.getSeconds() + this.restTime.second + 1)
@@ -62,10 +64,8 @@ export default {
           this.ring.play()
           this.pause()
         }
-        console.log('diff', diff)
         this.clock.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         this.clock.second = Math.floor((diff % (1000 * 60)) / 1000);
-        console.log(`${this.minute}:${this.second}`)
       }, 1000)
       
       // if (this.interval !== undefined || this.clock.minute <= 0) return
@@ -103,6 +103,8 @@ export default {
     setPredefined(minute, second) {
       this.predefined.minute = minute
       this.predefined.second = second
+      this.restTime.minute = minute
+      this.restTime.second = second
       this.reset()
     }
   },
