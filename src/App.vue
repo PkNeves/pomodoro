@@ -67,37 +67,26 @@ export default {
         this.clock.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         this.clock.second = Math.floor((diff % (1000 * 60)) / 1000);
       }, 1000)
-      
-      // if (this.interval !== undefined || this.clock.minute <= 0) return
-      // // if (this.clock.minute > 0) {
-      //   this.interval = setInterval(() => {
-      //     if (this.clock.minute === 0 && this.clock.second === 0) {
-      //       this.interval = clearInterval(this.interval)
-      //       this.ring.play()
-      //       return
-      //     }
-      //     if (this.clock.second == 0) {
-      //       this.clock.minute -= 1
-      //       this.clock.second = 59
-      //     } else {
-      //       this.clock.second -= 1
-      //     }
-      //   }, 1000)
-      // }
     },
     pause() {
-      let now = new Date()
-      let diff = this.endDate - now
-      this.interval = clearInterval(this.interval)
-      this.interval2 = clearInterval(this.interval2)
-      this.restTime.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-      this.restTime.second = Math.floor((diff % (1000 * 60)) / 1000);
+      if (this.interval2) {
+        let now = new Date()
+        let diff = this.endDate - now
+        this.interval = clearInterval(this.interval)
+        this.interval2 = clearInterval(this.interval2)
+        this.restTime.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+        this.restTime.second = Math.floor((diff % (1000 * 60)) / 1000);
+      }
     },
     reset() {
-      this.clock.minute = this.predefined.minute
-      this.clock.second = this.predefined.second
-      this.interval = clearInterval(this.interval)
-      this.interval2 = clearInterval(this.interval2)
+      if (this.interval2) {
+        this.clock.minute = this.predefined.minute
+        this.clock.second = this.predefined.second
+        this.restTime.minute = this.predefined.minute
+        this.restTime.second = this.predefined.second
+        this.interval = clearInterval(this.interval)
+        this.interval2 = clearInterval(this.interval2)
+      }
 
     },
     setPredefined(minute, second) {
@@ -105,6 +94,8 @@ export default {
       this.predefined.second = second
       this.restTime.minute = minute
       this.restTime.second = second
+      this.clock.minute = minute
+      this.clock.second = second
       this.reset()
     }
   },
