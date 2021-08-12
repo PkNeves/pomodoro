@@ -39,37 +39,65 @@ export default {
       predefined: {
         minute: 25,
         second: 0
-      }
-        
-
+      },
+      endDate: 0,
+      restTime: {
+        minute: 25,
+        second: 0
+      },
+      interval2: undefined
     }
   },
   methods: {
     start() {
-      if (this.interval !== undefined || this.clock.minute <= 0) return
-      // if (this.clock.minute > 0) {
-        this.interval = setInterval(() => {
-          if (this.clock.minute === 0 && this.clock.second === 0) {
-            this.interval = clearInterval(this.interval)
-            this.ring.play()
-            return
-          }
-          if (this.clock.second == 0) {
-            this.clock.minute -= 1
-            this.clock.second = 59
-          } else {
-            this.clock.second -= 1
-          }
-        }, 1000)
+      // let tempDate = new Date()
+      this.endDate = new Date()
+      this.endDate.setMinutes(this.endDate.getMinutes() + this.restTime.minute)
+      this.endDate.setSeconds(this.endDate.getSeconds() + this.restTime.second + 1)
+
+      this.interval2 = setInterval(() => {
+        let now = new Date()
+        let diff = this.endDate - now
+        if (diff <= 1000) {
+          this.ring.play()
+          this.pause()
+        }
+        console.log('diff', diff)
+        this.clock.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        this.clock.second = Math.floor((diff % (1000 * 60)) / 1000);
+        console.log(`${this.minute}:${this.second}`)
+      }, 1000)
+      
+      // if (this.interval !== undefined || this.clock.minute <= 0) return
+      // // if (this.clock.minute > 0) {
+      //   this.interval = setInterval(() => {
+      //     if (this.clock.minute === 0 && this.clock.second === 0) {
+      //       this.interval = clearInterval(this.interval)
+      //       this.ring.play()
+      //       return
+      //     }
+      //     if (this.clock.second == 0) {
+      //       this.clock.minute -= 1
+      //       this.clock.second = 59
+      //     } else {
+      //       this.clock.second -= 1
+      //     }
+      //   }, 1000)
       // }
     },
     pause() {
+      let now = new Date()
+      let diff = this.endDate - now
       this.interval = clearInterval(this.interval)
+      this.interval2 = clearInterval(this.interval2)
+      this.restTime.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+      this.restTime.second = Math.floor((diff % (1000 * 60)) / 1000);
     },
     reset() {
       this.clock.minute = this.predefined.minute
       this.clock.second = this.predefined.second
       this.interval = clearInterval(this.interval)
+      this.interval2 = clearInterval(this.interval2)
 
     },
     setPredefined(minute, second) {
