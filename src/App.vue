@@ -51,7 +51,7 @@ export default {
   methods: {
     start() {
       // let tempDate = new Date()
-      if (this.interval2 !== undefined || this.clock.minute <= 0) return
+      if (this.interval2 !== undefined || this.clock.minute <= 0 && this.clock.second <= 0) return
 
       this.endDate = new Date()
       this.endDate.setMinutes(this.endDate.getMinutes() + this.restTime.minute)
@@ -79,15 +79,12 @@ export default {
       }
     },
     reset() {
-      if (this.interval2) {
         this.clock.minute = this.predefined.minute
         this.clock.second = this.predefined.second
         this.restTime.minute = this.predefined.minute
         this.restTime.second = this.predefined.second
         this.interval = clearInterval(this.interval)
         this.interval2 = clearInterval(this.interval2)
-      }
-
     },
     setPredefined(minute, second) {
       this.predefined.minute = minute
