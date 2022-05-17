@@ -51,8 +51,11 @@ export default {
   methods: {
     start() {
       // let tempDate = new Date()
-      if (this.interval2 !== undefined || this.clock.minute <= 0 && this.clock.second <= 0) return
-
+      if (this.interval2 !== undefined || this.clock.minute <= 0 && this.clock.second <= 0) {
+        this.clock.minute = 0
+        this.clock.second = 0
+        return
+      }
       this.endDate = new Date()
       this.endDate.setMinutes(this.endDate.getMinutes() + this.restTime.minute)
       this.endDate.setSeconds(this.endDate.getSeconds() + this.restTime.second + 1)
@@ -64,8 +67,10 @@ export default {
           this.ring.play()
           this.pause()
         }
-        this.clock.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        this.clock.second = Math.floor((diff % (1000 * 60)) / 1000);
+        let minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let second = Math.floor((diff % (1000 * 60)) / 1000);
+        this.clock.minute = minute <= 0 ? 0 : minute
+        this.clock.second = second <= 0 ? 0 : second
       }, 1000)
     },
     pause() {
@@ -74,8 +79,10 @@ export default {
         let diff = this.endDate - now
         this.interval = clearInterval(this.interval)
         this.interval2 = clearInterval(this.interval2)
-        this.restTime.minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-        this.restTime.second = Math.floor((diff % (1000 * 60)) / 1000);
+        let minute = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+        let second = Math.floor((diff % (1000 * 60)) / 1000);
+        this.restTime.minute = minute <= 0 ? 0 : minute
+        this.restTime.second = second <= 0 ? 0 : second
       }
     },
     reset() {
